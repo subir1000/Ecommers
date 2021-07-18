@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+<!-- shipping method -->
+<section class="section">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="inner-wrapper border-box">
+                    <!-- navbar -->
+
+                    <!-- /navbar -->
+
+                    <!-- shipping-address -->
+                    <h3 class="mb-5 border-bottom pb-2">{{ name }} Product</h3>
+                    <form action="" class="row" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                         <div class="col-sm-6">
+                            <label for="firstName">Select Sub Category</label>
+                           {{ form.subcat }}
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="firstName">Product Name</label>
+                           {{ form.name }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="lastName">Product Price</label>
+                            {{ form.price }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="email">Stock</label>
+                            {{ form.stock }}
+                        </div>
+                         <div class="col-sm-4">
+                            <label for="fax">Size (if required) Seperated by comma</label>
+                             {{ form.size }}
+                        </div>
+                        {% if prodata %}
+                        <div class="col-sm-4">
+                            <label for="company">Image 1 <a href="{{ prodata.img1.url }}" target="_blank">{{ prodata.img1 }}</a></label>
+                            {{ form.img1 }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="address">Image 2 <a href="{{ prodata.img2.url }}" target="_blank">{{ prodata.img2 }}</a></label>
+                           {{ form.img2 }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="phone">Image 3 <a href="{{ prodata.img3.url }}" target="_blank">{{ prodata.img3 }}</a></label>
+                          {{ form.img3 }}
+                        </div>
+                        {% else %}
+                         <div class="col-sm-4">
+                            <label for="company">Image 1</label>
+                            {{ form.img1 }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="address">Image 2</label>
+                           {{ form.img2 }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="phone">Image 3</label>
+                          {{ form.img3 }}
+                        </div>
+                        {% endif %}
+
+
+                        <div class="col-sm-12">
+                            <label for="zip-code">Description</label>
+                            {{ form.des }}
+                        </div>
+
+
+                        <!-- select shipping method -->
+
+
+                        <!-- /select shipping method -->
+                         <div class="p-4  text-right">
+                        <input type="submit" class="btn btn-primary" value="{{ name1 }} Product">
+                    </div>
+                    </form>
+                    <!-- /shipping-address -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- /shipping method -->
+{% endblock %}

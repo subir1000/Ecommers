@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+<!-- google map -->
+<section class="map">
+  <!-- Google Map -->
+  <div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
+</section>
+<!-- /google map -->
+
+<!-- contact -->
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-between">
+      <!-- form -->
+      <div class="col-lg-7 mb-5 mb-lg-0 text-center text-md-left">
+        <h2 class="section-title">Contact Us</h2>
+        <form action="#" class="row">
+          <div class="col-md-6">
+            <input type="text" id="firstName" name="firstName" class="form-control mb-4 rounded-0" placeholder="First Name" required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="lastName" name="lastName" class="form-control mb-4 rounded-0" placeholder="Last Name" required>
+          </div>
+          <div class="col-md-12">
+            <input type="text" id="subject" name="subject" class="form-control mb-4 rounded-0" placeholder="Subject" required>
+          </div>
+          <div class="col-md-12">
+            <textarea name="message" id="message" class="form-control rounded-0 mb-4" placeholder="Message"></textarea>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" value="send" class="btn btn-primary">Submit now</button>
+          </div>
+        </form>
+      </div>
+      <!-- contact item -->
+      <div class="col-lg-4">
+        <div class="d-flex mb-60">
+          <i class="ti-location-pin contact-icon"></i>
+          <div>
+            <h4>Our Location</h4>
+            <p class="text-gray">211 Michael Extension, Lake Christopher, UD03 5WX</p>
+          </div>
+        </div>
+        <div class="d-flex mb-60">
+          <i class="ti-mobile contact-icon"></i>
+          <div>
+            <h4>Call Us Now</h4>
+            <p class="text-gray mb-0">(+18) 0117 022 7728</p>
+            <p class="text-gray mb-0">(+18) 0117 022 7729</p>
+          </div>
+        </div>
+        <div class="d-flex mb-60">
+          <i class="ti-email contact-icon"></i>
+          <div>
+            <h4>Write Us Now</h4>
+            <p class="text-gray mb-0">customer.service@example.com</p>
+            <p class="text-gray mb-0">info@example.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /contact -->
+{% endblock %}

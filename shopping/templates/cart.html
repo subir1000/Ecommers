@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Cart</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+<div class="section">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div class="block">
+            <div class="product-list">
+
+                <div class="table-responsive">
+                  <table class="table cart-table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Sub Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in cartdata %}
+                      <tr>
+                        <td>
+                          <a class="product-remove" href="{% url 'remove' i.id %}">&times;</a>
+                        </td>
+                        <td>
+                          <div class="product-info">
+                            <a href="{% url 'pdetail' i.pro.id %}"> <img class="img-fluid" src="{{ i.pro.img1.url }}" alt="product-img" height="100px;" width="100px;" /></a>
+                            <a href="{% url 'pdetail' i.pro.id %}">{{ i.pro.name }}</a>
+                          </div>
+                        </td>
+                        <td>&#8377; {{ i.pro.price }}</td>
+                        <td>{{ i.quantity }}</td>
+                        <td>&#8377; {{ i.TotalPrice }}</td>
+                        <td><a href="{% url 'checkout' i.id %}"><button class="btn btn-warning">Order</button></a></td>
+                      </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                  </table>
+                </div>
+                <hr>
+                <div class="d-flex flex-column flex-md-row align-items-center">
+                  <input type="text" class="form-control text-md-left text-center mb-3 mb-md-0" name="coupon" id="coupon" placeholder="I have a discout coupon">
+                  <button class="btn btn-outline-primary ml-md-3 w-100 mb-3 mb-md-0">Apply Coupon</button>
+                  <a href="#" class="btn ml-md-4 btn-dark w-100">Update Cart</a>
+                </div>
+                <hr>
+                {% if total > 0 %}
+                <div class="row">
+                  <div class="col-12">
+                    <ul class="list-unstyled text-right">
+                      <li>Grand Total <span class="d-inline-block w-100px"> &#8377; {{ total }}</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <hr>
+                <a href="{% url 'checkout' 'All' %}" class="btn btn-primary float-right">Checkout</a>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

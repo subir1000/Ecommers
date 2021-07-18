@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Thank you ! for your payment</h1>
+
+<h2>Hello,{{ name }}</h2>
+<h3>Order Summery</h3>
+{% for i in product_detail %}
+<li>Product Name: {{ i.pro.name }} - {{ i.totalprice }}</li>
+
+{% endfor %}
+<h3>Grand Total: {{ Totalprice }}</h3>
+<br><br>
+<b>Thanks</b>
+
+</body>
+</html>

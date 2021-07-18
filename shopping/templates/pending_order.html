@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Pending Order</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+<section class="user-dashboard section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<center><h1 style="color:orange;font-style:monospace;">Pending Order List</h1></center>
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Order ID</th>
+									<th>Full Name</th>
+									<th>Mobile Number</th>
+									<th>Date</th>
+									<th>Product Name</th>
+									<th>Items</th>
+									<th>Total Price</th>
+									<th>Status</th>
+									<th>Change Status</th>
+
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in data %}
+								<tr>
+									<td>#{{ i.order_detail.order_id }}</td>
+									<td>{{ i.order_detail.fullname }}</td>
+									<td>{{ i.order_detail.mobile1 }},{{ i.order_detail.mobile2 }}</td>
+									<td>{{ i.order_detail.orderdate }}</td>
+									<td>{{ i.pro.name }}</td>
+									<td>{{ i.quantity }}</td>
+									<td>{{ i.totalprice }}</td>
+									<td>{{ i.status }}</td>
+									<td><a href="{% url 'change' i.id %}"><button class="btn btn-warning btn-sm">Change Status</button></a></td>
+								</tr>
+							{% endfor %}
+
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

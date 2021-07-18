@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Product Single</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+<div id="quickView" class="quickview">
+  <div class="row w-100">
+    <div class="col-lg-6 col-md-6 mb-5 mb-md-0 pl-5 pt-4 pt-lg-0 pl-lg-0">
+      <img src="{% static 'images/feature/product.png' %}" alt="product-img" class="img-fluid">
+    </div>
+    <div class="col-lg-5 col-md-6 text-center text-md-left align-self-center pl-5">
+      <h3 class="mb-lg-2 mb-2">Woven Crop Cami</h3>
+      <span class="mb-lg-4 mb-3 h5">$90.00</span>
+      <p class="mb-lg-4 mb-3 text-gray">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. sed ut perspic atis unde omnis iste natus</p>
+      <form action="#">
+        <select class="form-control w-100 mb-2" name="color">
+          <option value="brown">Brown Color</option>
+          <option value="gray">Gray Color</option>
+          <option value="black">Black Color</option>
+        </select>
+        <select class="form-control w-100 mb-3" name="size">
+          <option value="small">Small Size</option>
+          <option value="medium">Medium Size</option>
+          <option value="large">Large Size</option>
+        </select>
+        <button class="btn btn-primary w-100 mb-lg-4 mb-3">add to cart</button>
+      </form>
+      <ul class="list-inline social-icon-alt">
+        <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+        <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+        <li class="list-inline-item"><a href="#"><i class="ti-vimeo-alt"></i></a></li>
+        <li class="list-inline-item"><a href="#"><i class="ti-google"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- product-single -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <!-- product image slider -->
+        <div class="product-slider">
+          <div data-image="{{ prodata.img1.url }}" >
+            <img class="img-fluid  image-zoom" src="{{ prodata.img1.url }}" alt="product-img"
+              data-zoom="{{ prodata.img1.url }}" >
+          </div>
+          <div data-image="{{ prodata.img2.url }}" >
+            <img class="img-fluid  image-zoom" src="{{ prodata.img2.url }}" alt="product-img"
+              data-zoom="{{ prodata.img2.url }}">
+          </div>
+          <div data-image="{{ prodata.img3.url }}">
+            <img class="img-fluid  image-zoom" src="{{ prodata.img3.url }}" alt="product-img"
+              data-zoom="{{ prodata.img3.url }}">
+          </div>
+        </div>
+      </div>
+      <!-- produt details -->
+      <div class="col-lg-6 mb-100">
+        <h2>{{ prodata.name }}
+         <a href="{% url 'edit_pro' prodata.id %}"><i class="ti-pencil"></i></a>
+          <a href="{% url 'delete' prodata.id 'Product'  %}"><i class="ti-trash"></i></a>
+         </h2>
+        <i class="ti-check-box text-success"></i>
+        <span class="text-success">Instock</span>
+        <ul class="list-inline mb-4">
+          <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+          <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+          <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+          <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+          <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+          <li class="list-inline-item"><a href="#" class="text-gray ml-3">( 3 Reviews )</a></li>
+        </ul>
+        <h4 class="text-primary h3">&#8377; {{ prodata.price }}</h4>
+        <div class="d-flex flex-column flex-sm-row justify-content-between mb-4">
+          <form action="{% url 'add_to_cart' prodata.id %}" method="post">
+            {% csrf_token %}
+          <input id="quantity" class="quantity mr-sm-2 mb-3 mb-sm-0" type="text"  value="" name="quantity">
+
+         {% if prodata.size %}
+            <br>
+          <select class="form-control ml-sm-2 mb-3 mb-sm-0" name="size">
+            {% for i in sizelist %}
+            <option class="form-control" value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+
+
+          </select>
+            <br>
+            {% endif %}
+            <br><br>
+             <input type="submit" class="btn btn-primary mb-4" value="add to cart">
+          </form> </div>
+
+        <h4 class="mb-3"><span class="text-primary">Harry up!</span> Sale ends in</h4>
+        <!-- syo-timer -->
+        <div class="syotimer dark">
+          <div id="sale-timer" data-year="2019" data-month="5" data-day="1" data-hour="1"></div>
+        </div>
+        <hr>
+        <div class="payment-option border border-primary mt-5 mb-4">
+          <h5 class="bg-white">Guaranted Safe Checkout</h5>
+          <img class="img-fluid w-100 p-3" src="{% static 'images/payment-card/all-card.png' %}" alt="payment-card">
+        </div>
+        <h5 class="mb-3">4 Great Reason to Buy From Us</h5>
+        <div class="row">
+          <!-- service item -->
+          <div class="col-lg-3 col-6 mb-4 mb-lg-0">
+            <div class="d-flex">
+              <i class="ti-truck icon-md mr-3"></i>
+              <div class="align-items-center">
+                <h6>Free Shipping</h6>
+              </div>
+            </div>
+          </div>
+          <!-- service item -->
+          <div class="col-lg-3 col-6 mb-4 mb-lg-0">
+            <div class="d-flex">
+              <i class="ti-shield icon-md mr-3"></i>
+              <div class="align-items-center">
+                <h6>Secure Payment</h6>
+              </div>
+            </div>
+          </div>
+          <!-- service item -->
+          <div class="col-lg-3 col-6 mb-4 mb-lg-0">
+            <div class="d-flex">
+              <i class="ti-money icon-md mr-3"></i>
+              <div class="align-items-center">
+                <h6>Lowest Price</h6>
+              </div>
+            </div>
+          </div>
+          <!-- service item -->
+          <div class="col-lg-3 col-6 mb-4 mb-lg-0">
+            <div class="d-flex">
+              <i class="ti-reload icon-md mr-3"></i>
+              <div class="align-items-center">
+                <h6>30 Days Return</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <h3 class="mb-3">Product Description</h3>
+        <p class="text-gray mb-4">{{ prodata.des }}</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /product-single -->
+
+<!-- testimonial -->
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="mb-4">What Our Customers Think?</h3>
+      </div>
+      <!-- testimonial-item -->
+      <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+        <div class="d-flex">
+          <div>
+            <img class="rounded-circle mr-4" src="{% static 'images/customer/customer-1.jpg' %}" alt="customer-img">
+          </div>
+          <div>
+            <ul class="list-inline">
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+            </ul>
+            <h4 class="text-dark">Best quality for the price</h4>
+            <p class="text-gray">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe
+              laudant tota rem ape riamipsa eaque.</p>
+            <h5 class="customer-name text-dark">Maggie Scott</h5>
+          </div>
+        </div>
+      </div>
+      <!-- testimonial-item -->
+      <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+        <div class="d-flex">
+          <div>
+            <img class="rounded-circle mr-4" src="{% static 'images/customer/customer-2.jpg' %}" alt="customer-img">
+          </div>
+          <div>
+            <ul class="list-inline">
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+            </ul>
+            <h4 class="text-dark">Best quality for the price</h4>
+            <p class="text-gray">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe
+              laudant tota rem ape riamipsa eaque.</p>
+            <h5 class="customer-name text-dark">Maggie Scott</h5>
+          </div>
+        </div>
+      </div>
+      <!-- testimonial-item -->
+      <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+        <div class="d-flex">
+          <div>
+            <img class="rounded-circle mr-4" src="{% static 'images/customer/customer-3.jpg' %}" alt="customer-img">
+          </div>
+          <div>
+            <ul class="list-inline">
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+              <li class="list-inline-item mx-0"><a href="#" class="rated"><i class="ti-star"></i></a></li>
+            </ul>
+            <h4 class="text-dark">Best quality for the price</h4>
+            <p class="text-gray">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe
+              laudant tota rem ape riamipsa eaque.</p>
+            <h5 class="customer-name text-dark">Maggie Scott</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /testimonial -->
+
+<!-- related products -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="mb-4">Related Products</h2>
+      </div>
+      <!-- product -->
+      {% for i in related_pro %}
+      {% if i.id != prodata.id %}
+      <div class="col-lg-3 col-sm-6 mb-5 mb-lg-0">
+        <div class="product text-center">
+          <div class="product-thumb">
+            <div class="overflow-hidden position-relative">
+              <a href="{% url 'pdetail' i.id %}">
+                <img class="img-fluid w-100 mb-3 img-first" src="{{ i.img1.url }}" alt="product-img">
+                <img class="img-fluid w-100 mb-3 img-second" src="{{ i.img2.url }}" alt="product-img">
+              </a>
+              <div class="btn-cart">
+                <a href="#" class="btn btn-primary btn-sm">Add To Cart</a>
+              </div>
+            </div>
+            <div class="product-hover-overlay">
+              <a href="#" class="product-icon favorite" data-toggle="tooltip" data-placement="left" title="Wishlist"><i
+                  class="ti-heart"></i></a>
+              <a href="#" class="product-icon cart" data-toggle="tooltip" data-placement="left" title="Compare"><i
+                  class="ti-direction-alt"></i></a>
+              <a data-vbtype="inline" href="#quickView" class="product-icon view venobox" data-toggle="tooltip"
+                data-placement="left" title="Quick View"><i class="ti-search"></i></a>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="h5"><a class="text-color" href="{% url 'pdetail' i.id %}">{{ i.name}}</a></h3>
+            <span class="h5">&#8377; {{ i.price }}</span>
+          </div>
+          <!-- product label badge -->
+          <div class="product-label new">
+            new
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <!-- //end of product -->
+      <!-- product -->
+
+    </div>
+  </div>
+  </div>
+</section>
+<!-- /related products -->
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Shipping Information</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+<!-- shipping method -->
+<section class="section">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="inner-wrapper border-box">
+                    <!-- navbar -->
+
+                    <!-- /navbar -->
+
+                    <!-- shipping-address -->
+                    <h3 class="mb-5 border-bottom pb-2">Shipping Address</h3>
+                    <form action="" class="row" method="post" >
+                      {% csrf_token %}
+
+                        <div class="col-sm-6">
+                            <label for="firstName">Full Name</label>
+                           {{ form.fullname }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="lastName">House Number</label>
+                            {{ form.houes_no }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="email">Area Name</label>
+                            {{ form.area_name }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="company">City/State</label>
+                            {{ form.city_state }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="address">Landmark</label>
+                           {{ form.landmark }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="phone">Pincode</label>
+                          {{ form.pincode }}
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <label for="zip-code">Mobile Number</label>
+                            {{ form.mobile1 }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="fax">Alternate Mobile Number</label>
+                             {{ form.mobile2 }}
+                        </div>
+
+                        <!-- select shipping method -->
+
+
+                        <!-- /select shipping method -->
+                         <div class="p-4 bg-gray text-right">
+                        <input type="submit" class="btn btn-primary" value="Pay Now">
+                    </div>
+                    </form>
+                    <!-- /shipping-address -->
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="border-box p-4">
+                    <h4>Order Summery</h4>
+                    <p>Excepteur sint occaecat cupidat non proi dent sunt.officia.</p>
+                    <ul class="list-unstyled">
+                        {% for i in cartdata %}
+                        <li class="d-flex justify-content-between">
+                            <span>{{ i.pro.name }}</span>
+                            <span>&#8377; {{ i.TotalPrice }} /-</span>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>Total</span>
+                        <strong>&#8377; {{ Grand_total }} /-</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /shipping method -->
+{% endblock %}

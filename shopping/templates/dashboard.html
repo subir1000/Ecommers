@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<!-- main wrapper -->
+<div class="main-wrapper">
+
+<!-- breadcrumb -->
+<nav class="bg-gray py-3">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">My Accounts</li>
+    </ol>
+  </div>
+</nav>
+<!-- /breadcrumb -->
+
+
+<section class="user-dashboard section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li class="list-inline-item"><a class="{{ class1 }}" href="{% url 'dashboard' 'AllOrder' %}">Dashboard</a></li>
+					<li class="list-inline-item"><a class="{{ class2 }}"  href="{% url 'dashboard' 'PendingOrder' %}">Orders</a></li>
+					<li class="list-inline-item"><a class="{{ class3 }}" href="{% url 'dashboard' 'AddressList' %}">Address</a></li>
+					<li class="list-inline-item"><a class="{{ class4 }}" href="{% url 'dashboard' 'Profile' %}">Profile Details</a></li>
+				</ul>
+				{% if type == 'AllOrder' %}
+				<div class="dashboard-wrapper user-dashboard">
+
+					<div class="total-order mt-4">
+						<h4>Total Orders</h4>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Order ID</th>
+										<th>Date</th>
+										<th>Items</th>
+										<th>Total Price</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for i in data %}
+									<tr>
+										<td><a href="#">{{ i.order_detail.order_id }}</a></td>
+										<td>{{ i.order_detail.orderdate }}</td>
+										<td>{{ i.quantity }}</td>
+										<td>&#8377; {{ i.totalprice }} /-</td>
+									</tr>
+								{% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				{% if type == 'PendingOrder' %}
+				<div class="dashboard-wrapper user-dashboard">
+
+					<div class="total-order mt-4">
+						<h4>Pending Orders</h4>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Order ID</th>
+										<th>Date</th>
+										<th>Items</th>
+										<th>Total Price</th>
+										<th>Expected Date</th>
+										<th>status</th>
+										<th>Track Order</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for i in data1 %}
+									<tr>
+										<td><a href="#">{{ i.order_detail.order_id }}</a></td>
+										<td>{{ i.order_detail.orderdate }}</td>
+										<td>{{ i.quantity }}</td>
+										<td>&#8377; {{ i.totalprice }} /-</td>
+										<td>{{ i.expected_date }}</td>
+										<td>{{ i.status }}</td>
+										<td><a href="{% url 'track' i.id %}"><button class="btn btn-sm">Track Order</button></a></td>
+									</tr>
+								{% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				{% if type == 'AddressList' %}
+				<div class="dashboard-wrapper user-dashboard">
+
+					<div class="total-order mt-4">
+						<h4>Your Address List</h4>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Full Name</th>
+										<th>Address</th>
+										<th>Area Name</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for i in checkout_detail %}
+									<tr>
+										<td><a href="#">{{ i.fullname }}</a></td>
+										<td>H.N. {{ i.houes_no }} {{ i.landmark }} {{ i.city_state }} , {{ i.pincode }}</td>
+										<td>{{ i.area_name }}</td>
+
+									</tr>
+								{% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				{% if type == 'Profile' %}
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="media">
+						<div class="pull-left mr-3">
+							<img class="media-object user-img" src="{{ profile_detail.image.url }}" alt="Image">
+						</div>
+						<div class="media-body align-self-center">
+							<h2 class="media-heading">Welcome {{ profile_detail.usr.first_name }} {{ profile_detail.usr.last_name }}</h2>
+							<h2 class="media-heading">Mobile Number:  {{ profile_detail.mobile }}</h2>
+							<h2 class="media-heading">Email:  {{ profile_detail.usr.email }}</h2>
+							<h2 class="media-heading">Address:  {{ profile_detail.address }}</h2>
+							</div>
+					</div>
+
+				</div>
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+{% endblock %}
